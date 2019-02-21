@@ -21,17 +21,41 @@
 
 #content {
     background-color:#f87500;
-    height:40vw;
-    opacity: 0.9;
+    height:auto;
+   /* opacity: 0.9;*/
     border-radius: 25px;
 }
 
 #title {
-    font-size: 7vw;
+    font-size: 6vw;
     font-weight: bold;
     color:#5b0992f8;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #31f852, 0 0 30px #31f852, 0 0 40px #31f852, 0 0 55px #31f852, 0 0 75px #31f852;
 }
+
+#question{
+    font-size: 3vw;
+    font-weight: bold;
+    color:#db0f2af8;
+    text-align: center;
+}
+
+.answer {
+    font-size: 2vw;
+    font-weight: bold;
+    color:#080aacf8;
+    text-align: center;
+}
+
+.answer:hover {
+    font-size: 4vw;
+    font-weight: bold;
+    cursor: pointer;
+    color:#21e207f8;
+    background-color:#1441d8f8;
+}
+
+
 
 #start {
     box-align: center;
