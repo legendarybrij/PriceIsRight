@@ -71,7 +71,7 @@ var game = {
                         
                     }
                     curQustion++;
-                    
+                    game.start(); 
                    
                     
                 });
