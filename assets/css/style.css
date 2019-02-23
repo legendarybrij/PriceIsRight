@@ -1,18 +1,18 @@
-#topborder {
-    height:50px;
-}
-
-#topborder {
-    height:50px;
-}
-
-#backbox{
-    background: url(../images/back.jpg) no-repeat;
+html, #backbox {
+    background: url(../images/back.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height:700px;
+}
+
+
+#topborder {
+    height:50px;
+}
+
+#topborder {
+    height:50px;
 }
 
 .col{
@@ -20,9 +20,9 @@
 }
 
 #content {
-    background-color:#f87500;
+    background-color:#f7a713;
     height:auto;
-   /* opacity: 0.9;*/
+    /*opacity: 0.95;*/
     border-radius: 25px;
 }
 
@@ -36,7 +36,7 @@
 #question{
     font-size: 3vw;
     font-weight: bold;
-    color:#db0f2af8;
+   
     text-align: center;
 }
 
