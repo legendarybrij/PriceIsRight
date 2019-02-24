@@ -27,14 +27,14 @@ var number = 0;
 //var img = "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/8-1.jpg?q=50&fit=crop&w=963";
 var questionOne = ["For $100, Can you name this famous actor?", "Katherine Heigl","Jennifer Aniston", "Rachel McAdams", "Kate Winslet", "Kate Winslet",100];
 var questionTwo = ["For $200, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 200];
-var questionThree = ["For $400, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 400];
-var questionFour = ["For $800, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 800];
-var questionFive = ["For $1600, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 1600];
-var questionSix = ["For $3200, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 3200];
-var questionSeven = ["For $6400, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 6400];
-var questionEight = ["For $12800, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 12800];
-var questionNine = ["For $25600, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 25600];
-var questionTen = ["For $51200, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 51200];
+var questionThree = ["For $300, Can you name this famous actor?", "Emma Stone","Hilary Duff", "Jennifer Lawrence", "Anne Hathaway", "Jennifer Lawrence", 300];
+var questionFour = ["For $400, Can you name this famous actor?", "Patrick Dempsey","Leonardo DiCaprio", "John Stamos", "Ryan Phillippe", "Leonardo DiCaprio", 400];
+var questionFive = ["For $500, Can you name this famous actor?", "Kaley Cuoco","Natalie Portman", "Charlize Theron", "Isla Fisher", "Charlize Theron", 500];
+var questionSix = ["For $600, Can you name this famous actor?", "Michael Caine","Tom Hanks", "Sean Penn", "Robert De Niro", "Robert De Niro", 600];
+var questionSeven = ["For $700, Can you name this famous actor?", "Kristen Bell","Rachel McAdams", "Laura Vandervoort", "Diane Kruger", "Rachel McAdams", 700];
+var questionEight = ["For $800, Can you name this famous actor?", "Al Pacino","Richard Gere", "Nicolas Cage", "Robert de Niro", "Al Pacino", 800];
+var questionNine = ["For $900, Can you name this famous actor?", "Olivia Wilde","Yvonne Strahovski", "Scarlett Johansson", "Amy Adams", "Scarlett Johansson", 900];
+var questionTen = ["For $1000, Can you name this famous actor?", "David Denman","Edward Norton", "Eric Dane", "Nathan Fillion", "Edward Norton", 1000];
 
 var rightAudio = document.createElement("audio");
 rightAudio.setAttribute("src","assets/images/correct.mp3");
@@ -48,17 +48,18 @@ timesUp.setAttribute("src","assets/images/timesup.mp3");
 /*var kate = document.createElement("img");
 kate.scr = "assets/images/kate.jpg";*/
 
-var kate = "assets/images/kate.jpg";
-var tom = "assets/images/tom.jpg";
-var changeImage = [kate,tom];
 
 
-var questions = [questionOne, questionTwo];
+var changeImage = ["kate", "tom", "jennifer", "leonardo", "charlize", "robert", "rachel", "alpacino", "scarlett", "edward"];
+//var pic = "assets/images/"+changeImage[curQuestion]+".jpg";
+
+var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, questionEight, questionNine, questionTen];
 
 //document.getElementById("image").innerHTML = "assets/images/kate.jpg";
 
 $(document).ready(function(){
        $("#image").hide();
+       $("#restart").hide();
         $("#start").on("click", function(){
             $("#question").addClass("alert alert-primary");
             $("#start").hide();
@@ -66,10 +67,15 @@ $(document).ready(function(){
 
                 game.start(); 
                 game.check();
-           
-          
         });
-                
+
+        $("#restart").on("click", function(){
+            $("#image").show();
+                game.init();
+                game.start(); 
+               // game.check();
+        });
+        
         
 
 
@@ -82,29 +88,30 @@ $(document).ready(function(){
 var game = {
             init: function() {
 
-                text = $("<div>");
-                questionOne = ["What is your name?", "Mike","Jason", "John", "Maria", "John"];
-                questionTwo = ["For $200, Can you name this famous actor?", "Anthony Hawk","Christian Bale", "Tom Hanks", "Richard Gere", "Tom Hanks", 200];
+                //text = $("<div>");
                 curQuestion = 0;
                 correct = 0; 
                 incorrect = 0;
                 unanswered =0;
                 won = 0;
                 //var source = "assets/images/"+actors[curQuestion]+".jpg";
+
                 target = "";
                 timeMachine = 0;
                 time = 30;
                 number = 0;
+              //  $("#rightAnswer").text("");
             
             },
             check: function(){
                 
                 $(".answer").on("click", function(event){
-
+                    clearInterval(timeMachine);
                             target = event.target.id;
-                            number =target.slice(-1);
+                            number = target.slice(-1);
+                            
                             if(questions[curQuestion][5]===questions[curQuestion][number])
-                            {
+                            {   
                                     rightAudio.play();
                                     correct++;
                                     won+=questions[curQuestion][6];
@@ -114,13 +121,15 @@ var game = {
                                     $("#rightAnswer").text("You got it Right. The right answer is: " + questions[curQuestion][5] +". Cheers!!" );
                                     $("#rightAnswer").addClass("alert alert-success");
                                     
+                                    
                             }else{
                                 wrongAudio.play();
                                 incorrect++;
+                                won-=100;
                                 $(".answer").hide();
                                 $("#rightAnswer").removeClass("alert alert-success alert-danger alert-info");
                                 $("#rightAnswer").show();
-                                $("#rightAnswer").text("Ahh oh...That was incorrect. The right answer is: " + questions[curQuestion][5] );
+                                $("#rightAnswer").text("Ahh oh...That was incorrect. For every wrong answer you will loose 100 dollars. The right answer is: " + questions[curQuestion][5] );
                                 $("#rightAnswer").addClass("alert alert-danger");
                             }
 
@@ -136,12 +145,12 @@ var game = {
             },
             start: function(){
                 
-                    //text = $("<div>");
-                
                 if(curQuestion<questions.length)
-                {
-                    $("#image").attr("src", changeImage[curQuestion]);
+                {   
+                    $("#image").attr("src", "assets/images/"+changeImage[curQuestion]+".jpg");
                     $(".answer").show();
+                    $(".result").hide();
+                     $("#restart").hide();
                     $("#rightAnswer").hide();
                    document.getElementById("timeMachine").innerHTML = "Time Left: " + time;
                    reduceTime();
@@ -160,6 +169,7 @@ var game = {
                 }else
                 {
                     game.finished();
+                    $("#restart").show();
                 }
 
 
@@ -185,15 +195,17 @@ var game = {
                 $("#rightAnswer").hide();
                 $("#timeMachine").empty();
                 $("#image").hide();
+                $(".result").show();
+                $("#restart").show();
                 $("#correct").text("Correct: "+correct);
                 $("#incorrect").text("Incorrect: "+incorrect);
                 $("#unanswered").text("Unanswered: "+unanswered);
                 if(won>0)
                 {
-                $("#money").text("Congratulations....You just have Won: $"+won);
+                $("#money").text("Congratulations!!You just have Won: $"+won);
                 }else
                 {
-                    $("#money").text("Sorry you couldn't win anything this time");
+                    $("#money").text("Sorry You Couldn't Win Anything This Time!!");
                 }
             }
 
