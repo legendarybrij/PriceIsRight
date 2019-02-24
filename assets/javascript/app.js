@@ -42,12 +42,15 @@ var wrongAudio = document.createElement("audio");
 wrongAudio.setAttribute("src","assets/images/wrong.mp3");
 var timesUp = document.createElement("audio");
 timesUp.setAttribute("src","assets/images/timesup.mp3");
+var intro =  document.createElement("audio");
+intro.setAttribute("src","assets/images/intro.mp3");
 
+var commonDown =  document.createElement("audio");
+commonDown.setAttribute("src","assets/images/commondown.mp3");
 
 
 /*var kate = document.createElement("img");
 kate.scr = "assets/images/kate.jpg";*/
-
 
 
 var changeImage = ["kate", "tom", "jennifer", "leonardo", "charlize", "robert", "rachel", "alpacino", "scarlett", "edward"];
@@ -57,10 +60,14 @@ var questions = [questionOne, questionTwo, questionThree, questionFour, question
 
 //document.getElementById("image").innerHTML = "assets/images/kate.jpg";
 
+
+
 $(document).ready(function(){
+    
        $("#image").hide();
        $("#restart").hide();
         $("#start").on("click", function(){
+            commonDown.play();
             $("#question").addClass("alert alert-primary");
             $("#start").hide();
             $("#image").show();
@@ -75,9 +82,6 @@ $(document).ready(function(){
                 game.start(); 
                // game.check();
         });
-        
-        
-
 
 });
 
