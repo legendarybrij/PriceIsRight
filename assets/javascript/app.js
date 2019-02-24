@@ -67,6 +67,7 @@ $(document).ready(function(){
        $("#image").hide();
        $("#restart").hide();
         $("#start").on("click", function(){
+            intro.play();
             commonDown.play();
             $("#question").addClass("alert alert-primary");
             $("#start").hide();
